@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/features/auth/api";
@@ -61,8 +62,14 @@ export function LoginForm() {
             <small>IFCE · Extensão</small>
           </span>
         </div>
-        <div className="login-photo-placeholder">
-          [ foto do campus / alunos em aula ]
+        <div className="login-photo">
+          <Image
+            src="/imagem-aula.jpg"
+            alt="Professor dando aula para estudantes em uma sala de aula"
+            fill
+            priority
+            sizes="(max-width: 760px) 100vw, 50vw"
+          />
         </div>
         <div className="login-art-copy">
           <h1>
