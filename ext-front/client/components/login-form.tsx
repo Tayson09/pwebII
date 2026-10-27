@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/features/auth/api";
@@ -156,7 +157,8 @@ export function LoginForm() {
             <span />
           </div>
           <p className="login-signup-note">
-            Ainda não tem conta? O cadastro de aluno estará disponível em breve.
+            É professor?{" "}
+            <Link href="/cadastro-professor">Solicite seu acesso</Link>.
           </p>
         </form>
       </section>

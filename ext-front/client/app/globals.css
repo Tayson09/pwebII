@@ -47,7 +47,9 @@ a {
 }
 
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -383,6 +385,23 @@ input {
   color: var(--ink);
 }
 
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 13px;
+  border: 1px solid #cfddd6;
+  border-radius: 9px;
+  outline: none;
+  background: #fbfdfc;
+  color: var(--ink);
+}
+
+.form-field textarea {
+  min-height: 82px;
+  resize: vertical;
+}
+
 .form-field input:focus {
   border-color: var(--green);
   box-shadow: 0 0 0 3px rgb(23 107 80 / 12%);
@@ -617,6 +636,220 @@ input {
   width: min(1420px, 100%);
   margin: 0 auto;
   padding: 34px 36px 48px;
+}
+
+.signup-page {
+  width: min(940px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 54px 0 72px;
+}
+
+.signup-heading {
+  max-width: 700px;
+  margin-bottom: 28px;
+}
+
+.signup-heading .eyebrow {
+  color: var(--green);
+}
+
+.signup-heading h1 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 48px);
+  letter-spacing: -0.045em;
+}
+
+.signup-heading > p:last-child {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.signup-form {
+  display: grid;
+  gap: 18px;
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.signup-section {
+  min-width: 0;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.signup-section legend {
+  padding: 0 8px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.signup-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+}
+
+.signup-form > .button {
+  width: 100%;
+}
+
+.signup-login-link {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.signup-login-link a,
+.signup-form .inline-notice a {
+  color: var(--green);
+  font-weight: 750;
+}
+
+.professor-courses {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+}
+
+.professor-courses ul {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.professor-courses li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.professor-courses li span {
+  display: grid;
+  gap: 5px;
+}
+
+.professor-courses li small,
+.professor-empty {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.professor-empty {
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+
+.professor-count {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.professor-list {
+  display: grid;
+  gap: 14px;
+}
+
+.professor-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--white);
+}
+
+.professor-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.professor-card h2 {
+  margin: 12px 0 4px;
+  font-size: 19px;
+}
+
+.professor-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.professor-status {
+  display: inline-flex;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #f0eee9;
+  color: #5c5a54;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.professor-status--pendente {
+  background: #fff3d6;
+  color: #875300;
+}
+
+.professor-status--aprovado {
+  background: #e7f5ed;
+  color: #176b50;
+}
+
+.professor-status--rejeitado {
+  background: #fff0ef;
+  color: #a12f2f;
+}
+
+.professor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.professor-actions .button,
+.professor-edit-form .button {
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.button-outline {
+  border-color: var(--line);
+  background: var(--white);
+  color: var(--ink);
+}
+
+.button-danger {
+  border-color: #f0cccc;
+  background: #fff3f3;
+  color: #9b2929;
+}
+
+.professor-edit-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 18px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.professor-edit-form .button {
+  align-self: start;
+  margin-top: 24px;
 }
 
 .dashboard-intro {
@@ -2106,5 +2339,34 @@ h3,
   .dashboard-chart-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .signup-page {
+    width: calc(100% - 32px);
+    padding-block: 32px;
+  }
+
+  .signup-fields,
+  .professor-edit-form {
+    grid-template-columns: 1fr;
+  }
+
+  .professor-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .professor-actions {
+    justify-content: flex-start;
+  }
+
+  .professor-edit-form .button {
+    margin-top: 0;
+  }
+
+  .professor-courses li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 }

@@ -1,5 +1,5 @@
-import { AdminDashboard } from "@/components/admin-dashboard";
+import { RoleHome } from "@/components/role-home";
 
-export default function AdminHomePage() {
-  return <AdminDashboard />;
+export default function HomePage() {
+  return <RoleHome />;
 }

@@ -16,14 +16,14 @@ import {
   type AuthSession,
 } from "@/lib/auth-session";
 
-const protectedPaths = ["/inicio", "/cursos"];
+const protectedPaths = ["/inicio", "/cursos", "/professores"];
 const AuthSessionContext = createContext<AuthSession | null>(null);
 
 export function useAuthSession() {
   return useContext(AuthSessionContext);
 }
 
-function NavigationIcon({ name }: { name: "home" | "school" }) {
+function NavigationIcon({ name }: { name: "home" | "school" | "people" }) {
   return name === "home" ? (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path
@@ -33,7 +33,7 @@ function NavigationIcon({ name }: { name: "home" | "school" }) {
         strokeWidth="1.7"
       />
     </svg>
-  ) : (
+  ) : name === "school" ? (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path
         d="m2 7 8-4 8 4-8 4z"
@@ -49,6 +49,16 @@ function NavigationIcon({ name }: { name: "home" | "school" }) {
         strokeWidth="1.7"
       />
     </svg>
+  ) : (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <circle cx="7" cy="7" r="3" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M2 16c.5-2.7 2.2-4 5-4s4.5 1.3 5 4M14 5a3 3 0 0 1 0 5m1 2c1.7.5 2.7 1.5 3 3"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.7"
+      />
+    </svg>
   );
 }
 
@@ -58,7 +68,12 @@ export function SiteFrame({ children }: { children: ReactNode }) {
     (path) => pathname === path || pathname.startsWith(`${path}/`),
   );
 
-  if (isProtectedPath || pathname === "/" || pathname === "/login") {
+  if (
+    isProtectedPath ||
+    pathname === "/" ||
+    pathname === "/login" ||
+    pathname === "/cadastro-professor"
+  ) {
     return children;
   }
 
@@ -113,11 +128,18 @@ export function AdminShell({
   }
 
   const isAdmin = currentSession.usuario.cargos.includes("ADMIN");
+  const canManageProfessors =
+    isAdmin || currentSession.usuario.cargos.includes("DEPPI");
+  const canOpenHome =
+    isAdmin || currentSession.usuario.cargos.includes("PROFESSOR");
   const items = [
-    ...(isAdmin
+    ...(canOpenHome
       ? [{ href: "/inicio", label: "Início", icon: "home" as const }]
       : []),
     { href: "/cursos", label: "Cursos", icon: "school" as const },
+    ...(canManageProfessors
+      ? [{ href: "/professores", label: "Professores", icon: "people" as const }]
+      : []),
   ];
   const initials = currentSession.usuario.nome
     .split(/\s+/)

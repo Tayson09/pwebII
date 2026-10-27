@@ -65,13 +65,26 @@ export function clearAuthSession() {
 }
 
 export function getHomePath(usuario: AuthUser) {
-  return usuario.cargos.includes("ADMIN") ? "/inicio" : "/cursos";
+  return usuario.cargos.some((cargo) =>
+    ["ADMIN", "PROFESSOR"].includes(cargo),
+  )
+    ? "/inicio"
+    : "/cursos";
 }
 
 export function canAccessPath(path: string, usuario: AuthUser) {
   const pathname = path.split("?")[0].split("#")[0];
 
   if (pathname === "/cursos") return usuario.cargos.length > 0;
-  if (pathname === "/inicio") return usuario.cargos.includes("ADMIN");
+  if (pathname === "/inicio") {
+    return (
+      usuario.cargos.includes("ADMIN") || usuario.cargos.includes("PROFESSOR")
+    );
+  }
+  if (pathname === "/professores") {
+    return (
+      usuario.cargos.includes("ADMIN") || usuario.cargos.includes("DEPPI")
+    );
+  }
   return false;
 }
